@@ -11,27 +11,34 @@ const App = () => {
   return (
     <>
       <header style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '1.5rem 2rem',
-        backgroundColor: '#000',
-        borderBottom: '1px solid #333',
-        color: 'white',
-        fontFamily: '"VT323", monospace'
-      }}>
-        {/* Logo Only */}
-        <div>
-          <img src="/logo.png" alt="Logo" style={{ height: '40px' }} />
-        </div>
+  backgroundColor: '#000',
+  borderBottom: '1px solid #333',
+  color: 'white',
+  fontFamily: '"VT323", monospace',
+  width: '100%'
+}}>
+  <div style={{
+  maxWidth: '1440px',        // 👈 wider than before
+  margin: '0 auto',
+  padding: '1.5rem 2.5rem',  // 👈 gives breathing room on all screen sizes
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  boxSizing: 'border-box'
+}}>
+    {/* Logo Only */}
+    <div>
+      <img src="/logo.png" alt="Logo" style={{ height: '40px' }} />
+    </div>
 
-        {/* Navigation */}
-        <nav style={{ display: 'flex', gap: '2rem' }}>
-          <a href="#" style={linkStyle}>Projects</a>
-          <a href="#" style={linkStyle}>About</a>
-          <a href="#" style={linkStyle}>Contact</a>
-        </nav>
-      </header>
+    {/* Navigation */}
+    <nav style={{ display: 'flex', gap: '2rem' }}>
+      <a href="#" style={linkStyle}>Projects</a>
+      <a href="#" style={linkStyle}>About</a>
+      <a href="#" style={linkStyle}>Contact</a>
+    </nav>
+  </div>
+</header>
 
       {/* Main is now empty and ready for new content */}
       <main style={{
