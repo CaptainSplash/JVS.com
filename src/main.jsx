@@ -58,11 +58,84 @@ const App = () => {
         minHeight: '100vh'
       }}>
         <h1>
-          {window.location.pathname === '/' && 'Home'}
           {window.location.pathname === '/projects' && 'Projects'}
           {window.location.pathname === '/about' && 'About'}
           {window.location.pathname !== '/' && window.location.pathname !== '/projects' && window.location.pathname !== '/about' && 'Other'}
         </h1>
+
+        {/* Show the grid ONLY on the homepage */}
+        {window.location.pathname === '/' && (
+          <section style={{
+            maxWidth: '1440px',
+            margin: '3rem auto 0 auto',
+            padding: '0 2.5rem',
+          }}>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gridTemplateRows: '1fr 1fr',
+              gap: '2rem',
+            }}>
+              {[1, 2, 3, 4].map((num) => (
+                <div key={num} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <a href={`/projects/project${num}`}>
+                    <img
+                      src={
+                        num === 1
+                          ? "/alldis-atlantic/heronowording_Hero.webp"
+                          : num === 2
+                          ? "/pacha/logoworld-04-03.webp"
+                          : num === 3
+                          ? "/Egan/devices_devices.webp"
+                          : num === 4
+                          ? "/inmediasres/70b18d0a-420e-4e03-93eb-0f6b2f043d8a.png"
+                          : ""
+                      }
+                      alt={`Project ${num}`}
+                      style={{
+                        width: '100%',
+                        maxWidth: '700px',
+                        aspectRatio: '16/9',
+                        borderRadius: '6px',
+                        border: '1px solid #333',
+                        objectFit: 'cover',
+                        background: '#222'
+                      }}
+                    />
+                  </a>
+                  <div style={{
+                    marginTop: '0.5rem',
+                    display: 'flex',
+                    gap: '0.5rem',
+                    flexWrap: 'wrap'
+                  }}>
+                    <span style={{
+                      fontSize: '0.8rem',
+                      padding: '2px 8px',
+                      border: '1px solid #888',
+                      borderRadius: '10px',
+                      background: '#181818',
+                      color: '#ccc',
+                      marginRight: '0.25rem'
+                    }}>
+                      Tag 1
+                    </span>
+                    <span style={{
+                      fontSize: '0.8rem',
+                      padding: '2px 8px',
+                      border: '1px solid #888',
+                      borderRadius: '10px',
+                      background: '#181818',
+                      color: '#ccc'
+                    }}>
+                      Tag 2
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
       </main>
     </>
   );
