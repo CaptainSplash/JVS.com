@@ -1,23 +1,37 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import ReactDOM from 'react-dom/client';
-
-// Import VT323 from Google Fonts
-const fontLink = document.createElement('link');
-fontLink.href = 'https://fonts.googleapis.com/css2?family=VT323&display=swap';
-fontLink.rel = 'stylesheet';
-document.head.appendChild(fontLink);
 
 const pageColors = {
   '/': '#111',
   '/projects': '#1a2634',
   '/about': '#34261a',
+  '/projects/project1': '#0f0',    // Green for Alldis Atlantic
+  '/projects/project2': '#c00',    // Red for Pacha Studios
+  '/projects/project3': '#fff',    // White for Egan Plant Services
+  '/projects/project4': '#888',    // Gray for In Medias Res
 };
 
-const getPageColor = () => {
-  return pageColors[window.location.pathname] || '#222';
+const getPageColor = () => pageColors[window.location.pathname] || '#222';
+
+const linkStyle = {
+  color: 'white',
+  textDecoration: 'none',
+  fontSize: '1.25rem',
+  fontFamily: '"VT323", monospace'
 };
 
 const App = () => {
+  const [showContact, setShowContact] = useState(false);
+  const contactRef = useRef(null);
+
+  const handleContactClick = (e) => {
+    e.preventDefault();
+    setShowContact((prev) => !prev);
+    setTimeout(() => {
+      if (contactRef.current) contactRef.current.querySelector('input')?.focus();
+    }, 0);
+  };
+
   return (
     <>
       <header style={{
@@ -43,109 +57,203 @@ const App = () => {
       </a>
     </div>
     {/* Navigation */}
-    <nav style={{ display: 'flex', gap: '2rem' }}>
-      <a href="/projects" style={linkStyle}>Projects</a>
+    <nav style={{ display: 'flex', gap: '2rem', position: 'relative' }}>
+      <a href="/#projects" style={linkStyle}>Projects</a>
       <a href="/about" style={linkStyle}>About</a>
-      <a href="#" style={linkStyle}>Contact</a>
+      <a
+        href="#"
+        style={linkStyle}
+        onClick={handleContactClick}
+      >
+        Contact
+      </a>
+      {showContact && (
+        <form
+          action="https://formspree.io/f/mkgbwejg"
+          method="POST"
+          ref={contactRef}
+          style={{
+            position: 'absolute',
+            top: '2.5rem',
+            right: 0,
+            background: '#181818',
+            border: '1px solid #888',
+            borderRadius: '8px',
+            padding: '1rem',
+            zIndex: 10,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.5rem',
+            minWidth: '250px'
+          }}
+        >
+          <input
+            name="email"
+            type="email"
+            placeholder="Your email"
+            required
+            style={{
+              padding: '0.5rem',
+              borderRadius: '4px',
+              border: '1px solid #333',
+              fontFamily: '"VT323", monospace'
+            }}
+          />
+          <textarea
+            name="message"
+            placeholder="Your message"
+            required
+            rows={3}
+            style={{
+              padding: '0.5rem',
+              borderRadius: '4px',
+              border: '1px solid #333',
+              fontFamily: '"VT323", monospace',
+              resize: 'vertical'
+            }}
+          />
+          <button
+            type="submit"
+            style={{
+              background: '#333',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '4px',
+              padding: '0.5rem',
+              fontFamily: '"VT323", monospace',
+              cursor: 'pointer'
+            }}
+          >
+            Send
+          </button>
+        </form>
+      )}
     </nav>
   </div>
 </header>
 
       {/* Main is now empty and ready for new content */}
-      <main style={{
-        padding: '4rem',
-        backgroundColor: getPageColor(),
-        minHeight: '100vh'
-      }}>
-        <h1>
-          {window.location.pathname === '/projects' && 'Projects'}
-          {window.location.pathname === '/about' && 'About'}
-          {window.location.pathname !== '/' && window.location.pathname !== '/projects' && window.location.pathname !== '/about' && 'Other'}
-        </h1>
+      <main
+  style={{
+    padding: '4rem',
+    backgroundColor: getPageColor(),
+    minHeight: '100vh',
+    paddingBottom: '6rem' // Add enough space for the footer to be revealed
+  }}
+>
+  <h1>
+    {window.location.pathname === '/projects' && 'Projects'}
+    {window.location.pathname === '/about' && 'About'}
+    {window.location.pathname !== '/' && window.location.pathname !== '/projects' && window.location.pathname !== '/about' && 'Other'}
+  </h1>
 
-        {/* Show the grid ONLY on the homepage */}
-        {window.location.pathname === '/' && (
-          <section style={{
-            maxWidth: '1440px',
-            margin: '3rem auto 0 auto',
-            padding: '0 2.5rem',
-          }}>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gridTemplateRows: '1fr 1fr',
-              gap: '2rem',
-            }}>
-              {[1, 2, 3, 4].map((num) => (
-                <div key={num} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                  <a href={`/projects/project${num}`}>
-                    <img
-                      src={
-                        num === 1
-                          ? "/alldis-atlantic/heronowording_Hero.webp"
-                          : num === 2
-                          ? "/pacha/logoworld-04-03.webp"
-                          : num === 3
-                          ? "/Egan/devices_devices.webp"
-                          : num === 4
-                          ? "/inmediasres/70b18d0a-420e-4e03-93eb-0f6b2f043d8a.png"
-                          : ""
-                      }
-                      alt={`Project ${num}`}
-                      style={{
-                        width: '100%',
-                        maxWidth: '700px',
-                        aspectRatio: '16/9',
-                        borderRadius: '6px',
-                        border: '1px solid #333',
-                        objectFit: 'cover',
-                        background: '#222'
-                      }}
-                    />
-                  </a>
-                  <div style={{
-                    marginTop: '0.5rem',
-                    display: 'flex',
-                    gap: '0.5rem',
-                    flexWrap: 'wrap'
-                  }}>
-                    <span style={{
-                      fontSize: '0.8rem',
-                      padding: '2px 8px',
-                      border: '1px solid #888',
-                      borderRadius: '10px',
-                      background: '#181818',
-                      color: '#ccc',
-                      marginRight: '0.25rem'
-                    }}>
-                      Tag 1
-                    </span>
-                    <span style={{
-                      fontSize: '0.8rem',
-                      padding: '2px 8px',
-                      border: '1px solid #888',
-                      borderRadius: '10px',
-                      background: '#181818',
-                      color: '#ccc'
-                    }}>
-                      Tag 2
-                    </span>
-                  </div>
-                </div>
-              ))}
+  {/* Show the grid ONLY on the homepage */}
+  {window.location.pathname === '/' && (
+    <section
+      id="projects"
+      style={{
+        maxWidth: '1440px',
+        margin: '3rem auto 0 auto',
+        padding: '0 2.5rem',
+      }}>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        gridTemplateRows: '1fr 1fr',
+        gap: '2rem',
+      }}>
+        {[1, 2, 3, 4].map((num) => (
+          <div
+            key={num}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start', // <-- changed from 'center' to 'flex-start'
+              width: '100%'
+            }}
+          >
+            <a href={`/projects/project${num}`} style={{ width: '100%' }}>
+              <img
+                src={
+                  num === 1
+                    ? "/alldis-atlantic/heronowording_Hero.webp"
+                    : num === 2
+                    ? "/pacha/logoworld-04-03.webp"
+                    : num === 3
+                    ? "/Egan/devices_devices.webp"
+                    : num === 4
+                    ? "/inmediasres/70b18d0a-420e-4e03-93eb-0f6b2f043d8a.png"
+                    : ""
+                }
+                alt={`Project ${num}`}
+                style={{
+                  width: '100%',
+                  maxWidth: '700px',
+                  aspectRatio: '16/9',
+                  borderRadius: '6px',
+                  border: '1px solid #333',
+                  objectFit: 'cover',
+                  background: '#222'
+                }}
+              />
+            </a>
+            <div
+              style={{
+                marginTop: '0.5rem',
+                display: 'flex',
+                gap: '0.5rem',
+                flexWrap: 'wrap'
+              }}
+            >
+              <span style={{
+                fontSize: '0.8rem',
+                padding: '2px 8px',
+                border: '1px solid #888',
+                borderRadius: '10px',
+                background: '#181818',
+                color: '#ccc',
+                marginRight: '0.25rem'
+              }}>
+                Tag 1
+              </span>
+              <span style={{
+                fontSize: '0.8rem',
+                padding: '2px 8px',
+                border: '1px solid #888',
+                borderRadius: '10px',
+                background: '#181818',
+                color: '#ccc'
+              }}>
+                Tag 2
+              </span>
             </div>
-          </section>
-        )}
-      </main>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+</main>
+
+<footer
+  style={{
+    width: '100%',
+    background: '#000',
+    color: '#fff',
+    fontFamily: '"VT323", monospace',
+    fontSize: '1.25rem',
+    padding: '2rem 0',
+    textAlign: 'center',
+    position: 'fixed',
+    left: 0,
+    bottom: 0,
+    zIndex: -1, // Sits behind the content
+    boxShadow: '0 -2px 10px rgba(0,0,0,0.5)'
+  }}
+>
+  &copy; {new Date().getFullYear()} JVS.com &mdash; All rights reserved.
+</footer>
     </>
   );
-};
-
-const linkStyle = {
-  color: 'white',
-  textDecoration: 'none',
-  fontSize: '1.25rem',
-  fontFamily: '"VT323", monospace'
 };
 
 ReactDOM.createRoot(document.getElementById('root')).render(
