@@ -22,7 +22,22 @@ const linkStyle = {
 
 const App = () => {
   const [showContact, setShowContact] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const contactRef = useRef(null);
+
+  // Add event listener for window resize
+  React.useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handleContactClick = (e) => {
     e.preventDefault();
@@ -67,18 +82,31 @@ const App = () => {
     margin: '0 auto',
     padding: '1.5rem 2.5rem',
     display: 'flex',
-    justifyContent: 'space-between',
+    flexDirection: windowWidth <= 529 ? 'column' : 'row',
+    justifyContent: windowWidth <= 529 ? 'center' : 'space-between',
     alignItems: 'center',
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    textAlign: windowWidth <= 529 ? 'center' : 'left'
 }}>
     {/* Logo Only */}
-    <div>
+    <div style={{
+      marginBottom: windowWidth <= 529 ? '1rem' : '0',
+      display: 'flex',
+      justifyContent: windowWidth <= 529 ? 'center' : 'flex-start',
+      width: windowWidth <= 529 ? '100%' : 'auto'
+    }}>
       <a href="/">
         <img src="/logo.png" alt="Logo" style={{ height: '40px' }} />
       </a>
     </div>
     {/* Navigation */}
-    <nav style={{ display: 'flex', gap: '2rem', position: 'relative' }}>
+    <nav style={{ 
+      display: 'flex', 
+      gap: '2rem', 
+      position: 'relative',
+      justifyContent: windowWidth <= 529 ? 'center' : 'flex-start',
+      width: windowWidth <= 529 ? '100%' : 'auto'
+    }}>
       <a href="/#projects" style={linkStyle}>Projects</a>
       <a href="/about" style={linkStyle}>About</a>
       <a
