@@ -191,7 +191,6 @@ const App = () => {
                   maxWidth: '700px',
                   aspectRatio: '16/9',
                   borderRadius: '6px',
-                  border: '1px solid #333',
                   objectFit: 'cover',
                   background: '#222'
                 }}
@@ -206,26 +205,28 @@ const App = () => {
               }}
             >
               <span style={{
-                fontSize: '0.8rem',
-                padding: '2px 8px',
-                border: '1px solid #888',
-                borderRadius: '10px',
-                background: '#181818',
-                color: '#ccc',
-                marginRight: '0.25rem'
-              }}>
-                Tag 1
-              </span>
-              <span style={{
-                fontSize: '0.8rem',
-                padding: '2px 8px',
-                border: '1px solid #888',
-                borderRadius: '10px',
-                background: '#181818',
-                color: '#ccc'
-              }}>
-                Tag 2
-              </span>
+  fontSize: '1.1rem',
+  padding: '2px 8px',
+  border: '1px solid #FFCD00', // <-- changed color here
+  borderRadius: '10px',
+  background: '#181818',
+  color: '#ccc',
+  marginRight: '0.25rem',
+  fontFamily: 'VT323'
+}}>
+  Tag 1
+</span>
+<span style={{
+  fontSize: '1.1rem',
+  padding: '2px 8px',
+  border: '1px solid #FFCD00', // <-- changed color here
+  borderRadius: '10px',
+  background: '#181818',
+  color: '#ccc',
+  fontFamily: 'VT323'
+}}>
+  Tag 2
+</span>
             </div>
           </div>
         ))}
@@ -237,16 +238,13 @@ const App = () => {
 <footer
   style={{
     width: '100%',
-    background: '#000',
+    background: '#222',         // Grayish color
     color: '#fff',
-    fontFamily: '"VT323", monospace',
-    fontSize: '1.25rem',
-    padding: '2rem 0',
+    fontFamily: 'VT323',
+    fontSize: '2rem',
+    padding: '10rem 0',         // Much taller: increased vertical padding
     textAlign: 'center',
-    position: 'fixed',
-    left: 0,
-    bottom: 0,
-    zIndex: -1, // Sits behind the content
+    zIndex: 100,
     boxShadow: '0 -2px 10px rgba(0,0,0,0.5)'
   }}
 >
