@@ -38,9 +38,19 @@ const App = () => {
       <style>
         {`
           @media (max-width: 900px) {
+            .project-grid-container {
+              padding: 0 1rem !important;
+              max-width: 100vw !important;
+            }
             .project-grid {
               grid-template-columns: 1fr !important;
               grid-template-rows: none !important;
+            }
+          }
+          @media (max-width: 500px) {
+            .project-grid-container {
+              padding: 0 !important;
+              max-width: 100vw !important;
             }
           }
         `}
@@ -162,10 +172,12 @@ const App = () => {
         {window.location.pathname === '/' && (
           <section
             id="projects"
+            className="project-grid-container"
             style={{
               maxWidth: '1440px',
               margin: '3rem auto 0 auto',
               padding: '0 2.5rem',
+              boxSizing: 'border-box'
             }}>
             <div
               className="project-grid"
@@ -174,6 +186,7 @@ const App = () => {
                 gridTemplateColumns: '1fr 1fr',
                 gridTemplateRows: '1fr 1fr',
                 gap: '2rem',
+                width: '100%' // Ensures grid fills the container
               }}
             >
               {[1, 2, 3, 4].map((num) => (
@@ -202,7 +215,6 @@ const App = () => {
                       alt={`Project ${num}`}
                       style={{
                         width: '100%',
-                        maxWidth: '700px',
                         aspectRatio: '16/9',
                         borderRadius: '6px',
                         objectFit: 'cover',
@@ -255,7 +267,7 @@ const App = () => {
     color: '#fff',
     fontFamily: 'VT323',
     fontSize: '1.25rem', // Match header font size
-    padding: '10rem 0',
+    padding: '4rem 0',   // Reduced from '10rem 0' to '4rem 0'
     textAlign: 'center',
     zIndex: 100,
     boxShadow: '0 -2px 10px rgba(0,0,0,0.5)'
