@@ -34,6 +34,17 @@ const App = () => {
 
   return (
     <>
+      {/* Responsive grid styles */}
+      <style>
+        {`
+          @media (max-width: 900px) {
+            .project-grid {
+              grid-template-columns: 1fr !important;
+              grid-template-rows: none !important;
+            }
+          }
+        `}
+      </style>
       <header style={{
   backgroundColor: '#000',
   borderBottom: '1px solid #333',
@@ -134,77 +145,80 @@ const App = () => {
 
       {/* Main is now empty and ready for new content */}
       <main
-  style={{
-    padding: '4rem',
-    backgroundColor: getPageColor(),
-    minHeight: '100vh',
-    paddingBottom: '6rem' // Add enough space for the footer to be revealed
-  }}
->
-  <h1>
-    {window.location.pathname === '/projects' && 'Projects'}
-    {window.location.pathname === '/about' && 'About'}
-    {window.location.pathname !== '/' && window.location.pathname !== '/projects' && window.location.pathname !== '/about' && 'Other'}
-  </h1>
+        style={{
+          padding: '4rem',
+          backgroundColor: getPageColor(),
+          minHeight: '100vh',
+          paddingBottom: '6rem'
+        }}
+      >
+        <h1>
+          {window.location.pathname === '/projects' && 'Projects'}
+          {window.location.pathname === '/about' && 'About'}
+          {window.location.pathname !== '/' && window.location.pathname !== '/projects' && window.location.pathname !== '/about' && 'Other'}
+        </h1>
 
-  {/* Show the grid ONLY on the homepage */}
-  {window.location.pathname === '/' && (
-    <section
-      id="projects"
-      style={{
-        maxWidth: '1440px',
-        margin: '3rem auto 0 auto',
-        padding: '0 2.5rem',
-      }}>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        gridTemplateRows: '1fr 1fr',
-        gap: '2rem',
-      }}>
-        {[1, 2, 3, 4].map((num) => (
-          <div
-            key={num}
+        {/* Show the grid ONLY on the homepage */}
+        {window.location.pathname === '/' && (
+          <section
+            id="projects"
             style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start', // <-- changed from 'center' to 'flex-start'
-              width: '100%'
-            }}
-          >
-            <a href={`/projects/project${num}`} style={{ width: '100%' }}>
-              <img
-                src={
-                  num === 1
-                    ? "/alldis-atlantic/heronowording_Hero.webp"
-                    : num === 2
-                    ? "/pacha/logoworld-04-03.webp"
-                    : num === 3
-                    ? "/Egan/devices_devices.webp"
-                    : num === 4
-                    ? "/inmediasres/70b18d0a-420e-4e03-93eb-0f6b2f043d8a.png"
-                    : ""
-                }
-                alt={`Project ${num}`}
-                style={{
-                  width: '100%',
-                  maxWidth: '700px',
-                  aspectRatio: '16/9',
-                  borderRadius: '6px',
-                  objectFit: 'cover',
-                  background: '#222'
-                }}
-              />
-            </a>
+              maxWidth: '1440px',
+              margin: '3rem auto 0 auto',
+              padding: '0 2.5rem',
+            }}>
             <div
+              className="project-grid"
               style={{
-                marginTop: '0.5rem',
-                display: 'flex',
-                gap: '0.5rem',
-                flexWrap: 'wrap'
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gridTemplateRows: '1fr 1fr',
+                gap: '2rem',
               }}
             >
-              <span style={{
+              {[1, 2, 3, 4].map((num) => (
+                <div
+                  key={num}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'flex-start', // <-- changed from 'center' to 'flex-start'
+                    width: '100%'
+                  }}
+                >
+                  <a href={`/projects/project${num}`} style={{ width: '100%' }}>
+                    <img
+                      src={
+                        num === 1
+                          ? "/alldis-atlantic/heronowording_Hero.webp"
+                          : num === 2
+                          ? "/pacha/logoworld-04-03.webp"
+                          : num === 3
+                          ? "/Egan/devices_devices.webp"
+                          : num === 4
+                          ? "/inmediasres/70b18d0a-420e-4e03-93eb-0f6b2f043d8a.png"
+                          : ""
+                      }
+                      alt={`Project ${num}`}
+                      style={{
+                        width: '100%',
+                        maxWidth: '700px',
+                        aspectRatio: '16/9',
+                        borderRadius: '6px',
+                        objectFit: 'cover',
+                        background: '#222'
+                      }}
+                    />
+                  </a>
+                  <div
+                    style={{
+                      marginTop: '0.5rem',
+                      display: 'flex',
+                      gap: '0.5rem',
+                      flexWrap: 'wrap'
+                    }}
+                  >
+                    <span style={{
   fontSize: '1.1rem',
   padding: '2px 8px',
   border: '1px solid #FFCD00', // <-- changed color here
@@ -227,15 +241,14 @@ const App = () => {
 }}>
   Tag 2
 </span>
+                  </div>
+                </div>
+              ))}
             </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  )}
-</main>
-
-<footer
+          </section>
+        )}
+      </main>
+      <footer
   style={{
     width: '100%',
     background: '#222',         // Grayish color
