@@ -251,17 +251,46 @@ const App = () => {
       <footer
   style={{
     width: '100%',
-    background: '#222',         // Grayish color
+    background: '#222',
     color: '#fff',
     fontFamily: 'VT323',
-    fontSize: '2rem',
-    padding: '10rem 0',         // Much taller: increased vertical padding
+    fontSize: '1.25rem', // Match header font size
+    padding: '10rem 0',
     textAlign: 'center',
     zIndex: 100,
     boxShadow: '0 -2px 10px rgba(0,0,0,0.5)'
   }}
 >
-  &copy; {new Date().getFullYear()} JVS.com &mdash; All rights reserved.
+  <div
+    style={{
+      maxWidth: '1440px',
+      margin: '0 auto',
+      padding: '1.5rem 2.5rem',
+      boxSizing: 'border-box',
+      display: 'flex',
+      alignItems: 'flex-start',
+      justifyContent: 'space-between',
+      gap: '2rem'
+    }}
+  >
+    {/* Left: Short line of wording */}
+    <div style={{ flex: 2, textAlign: 'left' }}>
+      Example footer wording goes here.
+    </div>
+
+    {/* Center: Social links stacked */}
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+      <span>Instagram</span>
+      <span>Twitter</span>
+      <span>LinkedIn</span>
+      <span>GitHub</span>
+    </div>
+
+    {/* Right: Temporary wording */}
+    <div style={{ flex: 1, textAlign: 'right' }}>
+      Temporary contact wording
+    </div>
+  </div>
 </footer>
     </>
   );
