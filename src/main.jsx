@@ -288,7 +288,7 @@ const App = () => {
           </section>
         )}
       </main>
-      <footer
+<footer
   style={{
     width: '100%',
     background: '#222',
@@ -308,18 +308,30 @@ const App = () => {
       padding: '1.5rem 2.5rem',
       boxSizing: 'border-box',
       display: 'flex',
-      alignItems: 'flex-start',
-      justifyContent: 'space-between',
-      gap: '2rem'
+      flexDirection: windowWidth <= 529 ? 'column' : 'row',
+      alignItems: windowWidth <= 529 ? 'center' : 'flex-start',
+      justifyContent: windowWidth <= 529 ? 'center' : 'space-between',
+      gap: windowWidth <= 529 ? '1.5rem' : '2rem'
     }}
   >
     {/* Left: Short line of wording */}
-    <div style={{ flex: 2, textAlign: 'left' }}>
+    <div style={{ 
+      flex: windowWidth <= 529 ? '0 0 100%' : 2, 
+      textAlign: windowWidth <= 529 ? 'center' : 'left',
+      width: windowWidth <= 529 ? '100%' : 'auto'
+    }}>
       Example footer wording goes here.
     </div>
 
     {/* Center: Social links stacked */}
-    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+    <div style={{ 
+      flex: windowWidth <= 529 ? '0 0 100%' : 1, 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center', 
+      gap: '0.5rem',
+      width: windowWidth <= 529 ? '100%' : 'auto'
+    }}>
       <span>Instagram</span>
       <span>Twitter</span>
       <span>LinkedIn</span>
@@ -327,7 +339,11 @@ const App = () => {
     </div>
 
     {/* Right: Temporary wording */}
-    <div style={{ flex: 1, textAlign: 'right' }}>
+    <div style={{ 
+      flex: windowWidth <= 529 ? '0 0 100%' : 1, 
+      textAlign: windowWidth <= 529 ? 'center' : 'right',
+      width: windowWidth <= 529 ? '100%' : 'auto'
+    }}>
       Temporary contact wording
     </div>
   </div>
