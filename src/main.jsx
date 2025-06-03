@@ -320,7 +320,7 @@ const App = () => {
       textAlign: windowWidth <= 529 ? 'center' : 'left',
       width: windowWidth <= 529 ? '100%' : 'auto'
     }}>
-      Example footer wording goes here.
+      V.1.0. Last updated 03/06/2025
     </div>
 
     {/* Center: Social links stacked */}
@@ -328,14 +328,16 @@ const App = () => {
       flex: windowWidth <= 529 ? '0 0 100%' : 1, 
       display: 'flex', 
       flexDirection: 'column', 
-      alignItems: 'center', 
+      alignItems: windowWidth <= 650 ? 'center' : 'flex-start',
       gap: '0.5rem',
-      width: windowWidth <= 529 ? '100%' : 'auto'
+      width: windowWidth <= 529 ? 'fit-content' : 'auto',
+      marginLeft: windowWidth <= 650 ? 'auto' : '20rem',
+      marginRight: windowWidth <= 650 ? 'auto' : 0
     }}>
-      <span>Instagram</span>
-      <span>Twitter</span>
       <span>LinkedIn</span>
-      <span>GitHub</span>
+      <span>Behance</span>
+      <span>Instagram</span>
+      <span>PDF</span>
     </div>
 
     {/* Right: Temporary wording */}
@@ -344,7 +346,7 @@ const App = () => {
       textAlign: windowWidth <= 529 ? 'center' : 'right',
       width: windowWidth <= 529 ? '100%' : 'auto'
     }}>
-      Temporary contact wording
+      Let's make something memorable
     </div>
   </div>
 </footer>
