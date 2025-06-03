@@ -308,31 +308,48 @@ const App = () => {
       padding: '1.5rem 2.5rem',
       boxSizing: 'border-box',
       display: 'flex',
-      flexDirection: windowWidth <= 529 ? 'column' : 'row',
-      alignItems: windowWidth <= 529 ? 'center' : 'flex-start',
-      justifyContent: windowWidth <= 529 ? 'center' : 'space-between',
-      gap: windowWidth <= 529 ? '1.5rem' : '2rem'
+      flexDirection: windowWidth <= 900 ? 'column' : 'row', // Collapse to column at 900px or below
+      alignItems: windowWidth <= 900 ? 'center' : 'flex-start',
+      justifyContent: windowWidth <= 900 ? 'center' : 'space-between',
+      gap: windowWidth <= 900 ? '1.5rem' : '2rem'
     }}
   >
-    {/* Left: Short line of wording */}
-    <div style={{ 
-      flex: windowWidth <= 529 ? '0 0 100%' : 2, 
-      textAlign: windowWidth <= 529 ? 'center' : 'left',
-      width: windowWidth <= 529 ? '100%' : 'auto'
-    }}>
-      V.1.0. Last updated 03/06/2025
-    </div>
+    {/* Left: Short line of wording with grid only around "V.1.0." */}
+<div
+  style={{
+    flex: windowWidth <= 529 ? '0 0 100%' : 2,
+    textAlign: windowWidth <= 529 ? 'center' : 'left',
+    width: windowWidth <= 529 ? '100%' : 'auto',
+    display: 'inline-block',
+    marginBottom: windowWidth <= 529 ? '1rem' : 0,
+    fontFamily: 'VT323',
+    color: '#ccc'
+  }}
+>
+  <span
+    style={{
+      border: '1px solid #FFCD00',
+      borderRadius: '10px',
+      background: '#181818',
+      padding: '2px 8px',
+      marginRight: '0.5rem'
+    }}
+  >
+    V.1.0.
+  </span>
+  Last updated 03/06/2025
+</div>
 
     {/* Center: Social links stacked */}
     <div style={{ 
-      flex: windowWidth <= 529 ? '0 0 100%' : 1, 
+      flex: windowWidth <= 900 ? '0 0 100%' : 1, 
       display: 'flex', 
       flexDirection: 'column', 
-      alignItems: windowWidth <= 650 ? 'center' : 'flex-start',
+      alignItems: windowWidth <= 900 ? 'center' : 'flex-start', // Center align on <=900px
       gap: '0.5rem',
-      width: windowWidth <= 529 ? 'fit-content' : 'auto',
-      marginLeft: windowWidth <= 650 ? 'auto' : '20rem',
-      marginRight: windowWidth <= 650 ? 'auto' : 0
+      width: windowWidth <= 900 ? 'fit-content' : 'auto',
+      marginLeft: windowWidth <= 900 ? 'auto' : '20rem',
+      marginRight: windowWidth <= 900 ? 'auto' : 0
     }}>
       <span>LinkedIn</span>
       <span>Behance</span>
@@ -340,13 +357,26 @@ const App = () => {
       <span>PDF</span>
     </div>
 
-    {/* Right: Temporary wording */}
+    {/* Right: Temporary wording with border, always on one line */}
     <div style={{ 
       flex: windowWidth <= 529 ? '0 0 100%' : 1, 
       textAlign: windowWidth <= 529 ? 'center' : 'right',
       width: windowWidth <= 529 ? '100%' : 'auto'
     }}>
-      Let's make something memorable
+      <span
+        style={{
+          border: '1px solid #FFCD00',
+          borderRadius: '10px',
+          background: '#181818',
+          padding: '2px 8px',
+          color: '#fff',
+          fontFamily: 'VT323',
+          whiteSpace: 'nowrap', // Prevents line break
+          display: 'inline-block'
+        }}
+      >
+        Let's make something memorable
+      </span>
     </div>
   </div>
 </footer>
