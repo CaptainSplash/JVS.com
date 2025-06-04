@@ -345,23 +345,125 @@ const App = () => {
       flex: windowWidth <= 900 ? '0 0 100%' : 1, 
       display: 'flex', 
       flexDirection: 'column', 
-      alignItems: windowWidth <= 900 ? 'center' : 'flex-start', // Center align on <=900px
-      gap: '0.5rem',
+      alignItems: windowWidth <= 900 ? 'center' : 'flex-start',
+      gap: '0.25rem',
       width: windowWidth <= 900 ? 'fit-content' : 'auto',
       marginLeft: windowWidth <= 900 ? 'auto' : '20rem',
       marginRight: windowWidth <= 900 ? 'auto' : 0
     }}>
-      <span>LinkedIn</span>
-      <span>Behance</span>
-      <span>Instagram</span>
-      <span>PDF</span>
+      <style>
+        {`
+          .footer-link {
+            border-bottom: 2px dotted #fff;
+            transition: border-bottom 0.2s, color 0.2s;
+          }
+          .footer-link:hover, .footer-link:focus {
+            border-bottom: 2px solid #fff;
+            color: #FFCD00;
+          }
+        `}
+      </style>
+      <span style={{ display: 'inline-block', position: 'relative', paddingBottom: '0.05em' }}>
+        <a
+          href="https://www.linkedin.com/in/johnshields123/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="footer-link"
+          style={{
+            display: 'inline-block',
+            paddingBottom: '0.05em',
+            color: 'inherit',
+            textDecoration: 'none'
+          }}
+        >
+          LinkedIn
+        </a>
+        <sup style={{
+          color: '#FFCD00',
+          fontSize: '0.85em',
+          marginLeft: '0.25em',
+          fontFamily: 'inherit',
+          position: 'relative',
+          top: '-0.2em'
+        }}>1</sup>
+      </span>
+      <span style={{ display: 'inline-block', position: 'relative', paddingBottom: '0.05em' }}>
+        <a
+          href="https://www.behance.net/johnshields5"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="footer-link"
+          style={{
+            display: 'inline-block',
+            paddingBottom: '0.05em',
+            color: 'inherit',
+            textDecoration: 'none'
+          }}
+        >
+          Behance
+        </a>
+        <sup style={{
+          color: '#FFCD00',
+          fontSize: '0.85em',
+          marginLeft: '0.25em',
+          fontFamily: 'inherit',
+          position: 'relative',
+          top: '-0.2em'
+        }}>2</sup>
+      </span>
+      <span style={{ display: 'inline-block', position: 'relative', paddingBottom: '0.05em' }}>
+        <a
+          href="https://www.instagram.com/johnvinshields/?hl=en"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="footer-link"
+          style={{
+            display: 'inline-block',
+            paddingBottom: '0.05em',
+            color: 'inherit',
+            textDecoration: 'none'
+          }}
+        >
+          Instagram
+        </a>
+        <sup style={{
+          color: '#FFCD00',
+          fontSize: '0.85em',
+          marginLeft: '0.25em',
+          fontFamily: 'inherit',
+          position: 'relative',
+          top: '-0.2em'
+        }}>4</sup>
+      </span>
+      <span style={{ display: 'inline-block', position: 'relative', paddingBottom: '0.05em' }}>
+        <span
+          className="footer-link"
+          style={{
+            display: 'inline-block',
+            paddingBottom: '0.05em'
+          }}
+        >
+          PDF
+        </span>
+        <sup style={{
+          color: '#FFCD00',
+          fontSize: '0.85em',
+          marginLeft: '0.25em',
+          fontFamily: 'inherit',
+          position: 'relative',
+          top: '-0.2em'
+        }}>5</sup>
+      </span>
     </div>
 
     {/* Right: Temporary wording with border, always on one line */}
     <div style={{ 
       flex: windowWidth <= 529 ? '0 0 100%' : 1, 
       textAlign: windowWidth <= 529 ? 'center' : 'right',
-      width: windowWidth <= 529 ? '100%' : 'auto'
+      width: windowWidth <= 529 ? '100%' : 'auto',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: windowWidth <= 529 ? 'center' : 'flex-end'
     }}>
       <span
         style={{
@@ -371,11 +473,21 @@ const App = () => {
           padding: '2px 8px',
           color: '#fff',
           fontFamily: 'VT323',
-          whiteSpace: 'nowrap', // Prevents line break
-          display: 'inline-block'
+          whiteSpace: 'nowrap',
+          display: 'inline-block',
+          position: 'relative',
+          marginRight: '0.5em'
         }}
       >
         Let's make something memorable
+        <sup style={{
+          color: '#FFCD00',
+          fontSize: '0.85em',
+          fontFamily: 'inherit',
+          position: 'absolute',
+          top: '-0.8em',
+          right: '-0.8em' // Adjusted closer to the box
+        }}>6</sup>
       </span>
     </div>
   </div>
