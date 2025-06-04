@@ -22,6 +22,7 @@ const linkStyle = {
 
 const App = () => {
   const [showContact, setShowContact] = useState(false);
+  const [showContactFooter, setShowContactFooter] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const contactRef = useRef(null);
 
@@ -52,7 +53,7 @@ const App = () => {
       {/* Responsive grid styles */}
       <style>
         {`
-          @media (max-width: 900px) {
+          @media (max-width: 1033px) {
             .project-grid-container {
               padding: 0 1rem !important;
               max-width: 100vw !important;
@@ -61,12 +62,26 @@ const App = () => {
               grid-template-columns: 1fr !important;
               grid-template-rows: none !important;
             }
+            .footer-flex {
+              flex-direction: column !important;
+              align-items: center !important;
+              justify-content: center !important;
+              gap: 1.5rem !important;
+            }
           }
           @media (max-width: 500px) {
             .project-grid-container {
               padding: 0 !important;
               max-width: 100vw !important;
             }
+          }
+          .footer-link {
+            border-bottom: 2px dotted #fff;
+            transition: border-bottom 0.2s, color 0.2s;
+          }
+          .footer-link:hover, .footer-link:focus {
+            border-bottom: 2px solid #fff;
+            color: #FFCD00;
           }
         `}
       </style>
@@ -294,24 +309,25 @@ const App = () => {
     background: '#222',
     color: '#fff',
     fontFamily: 'VT323',
-    fontSize: '1.25rem', // Match header font size
-    padding: '4rem 0',   // Reduced from '10rem 0' to '4rem 0'
+    fontSize: '1.25rem',
+    padding: '4rem 0',
     textAlign: 'center',
     zIndex: 100,
     boxShadow: '0 -2px 10px rgba(0,0,0,0.5)'
   }}
 >
   <div
+    className="footer-flex"
     style={{
       maxWidth: '1440px',
       margin: '0 auto',
       padding: '1.5rem 2.5rem',
       boxSizing: 'border-box',
       display: 'flex',
-      flexDirection: windowWidth <= 900 ? 'column' : 'row', // Collapse to column at 900px or below
-      alignItems: windowWidth <= 900 ? 'center' : 'flex-start',
-      justifyContent: windowWidth <= 900 ? 'center' : 'space-between',
-      gap: windowWidth <= 900 ? '1.5rem' : '2rem'
+      flexDirection: windowWidth <= 1033 ? 'column' : 'row',
+      alignItems: windowWidth <= 1033 ? 'center' : 'flex-start',
+      justifyContent: windowWidth <= 1033 ? 'center' : 'space-between',
+      gap: windowWidth <= 1033 ? '1.5rem' : '2rem'
     }}
   >
     {/* Left: Short line of wording with grid only around "V.1.0." */}
@@ -345,11 +361,11 @@ const App = () => {
       flex: windowWidth <= 900 ? '0 0 100%' : 1, 
       display: 'flex', 
       flexDirection: 'column', 
-      alignItems: windowWidth <= 900 ? 'center' : 'flex-start',
+      alignItems: windowWidth <= 1033 ? 'center' : 'flex-start', // changed from 900 to 1033
       gap: '0.25rem',
       width: windowWidth <= 900 ? 'fit-content' : 'auto',
-      marginLeft: windowWidth <= 900 ? 'auto' : '20rem',
-      marginRight: windowWidth <= 900 ? 'auto' : 0
+      marginLeft: windowWidth <= 1033 ? 'auto' : '20rem', // changed from 900 to 1033
+      marginRight: windowWidth <= 1033 ? 'auto' : 0      // changed from 900 to 1033
     }}>
       <style>
         {`
@@ -463,7 +479,8 @@ const App = () => {
       width: windowWidth <= 529 ? '100%' : 'auto',
       display: 'flex',
       alignItems: 'center',
-      justifyContent: windowWidth <= 529 ? 'center' : 'flex-end'
+      justifyContent: windowWidth <= 529 ? 'center' : 'flex-end',
+      position: 'relative'
     }}>
       <span
         style={{
@@ -476,8 +493,13 @@ const App = () => {
           whiteSpace: 'nowrap',
           display: 'inline-block',
           position: 'relative',
-          marginRight: '0.5em'
+          marginRight: '0.5em',
+          cursor: 'pointer'
         }}
+        onClick={() => setShowContactFooter((prev) => !prev)}
+        tabIndex={0}
+        onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') setShowContactFooter((prev) => !prev); }}
+        aria-label="Open contact form"
       >
         Let's make something memorable
         <sup style={{
@@ -486,9 +508,70 @@ const App = () => {
           fontFamily: 'inherit',
           position: 'absolute',
           top: '-0.8em',
-          right: '-0.8em' // Adjusted closer to the box
+          right: '-0.8em'
         }}>6</sup>
       </span>
+      {showContactFooter && (
+        <form
+          action="https://formspree.io/f/mkgbwejg"
+          method="POST"
+          style={{
+            position: 'absolute',
+            bottom: '2.5rem',
+            right: 0,
+            background: '#181818',
+            border: '1px solid #888',
+            borderRadius: '8px',
+            padding: '1rem',
+            zIndex: 10,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.5rem',
+            minWidth: '250px'
+          }}
+          onClick={e => e.stopPropagation()}
+        >
+          <input
+            name="email"
+            type="email"
+            placeholder="Your email"
+            required
+            style={{
+              padding: '0.5rem',
+              borderRadius: '4px',
+              border: '1px solid #333',
+              fontFamily: '"VT323", monospace'
+            }}
+          />
+          <textarea
+            name="message"
+            placeholder="Your message"
+            required
+            rows={3}
+            style={{
+              padding: '0.5rem',
+              borderRadius: '4px',
+              border: '1px solid #333',
+              fontFamily: '"VT323", monospace',
+              resize: 'vertical'
+            }}
+          />
+          <button
+            type="submit"
+            style={{
+              background: '#333',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '4px',
+              padding: '0.5rem',
+              fontFamily: '"VT323", monospace',
+              cursor: 'pointer'
+            }}
+          >
+            Send
+          </button>
+        </form>
+      )}
     </div>
   </div>
 </footer>
