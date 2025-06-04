@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import ReactDOM from 'react-dom/client';
+import StackedImagesSection from './components/StackedImagesSection';
 
 const pageColors = {
   '/': '#111',
@@ -100,6 +101,31 @@ const App = () => {
             opacity: 0.85;
             cursor: pointer;
           }
+          /* Header nav link underline animation */
+          .header-link {
+            position: relative;
+            color: white;
+            text-decoration: none;
+            font-size: 1.25rem;
+            font-family: "VT323", monospace;
+            padding-bottom: 2px;
+          }
+          .header-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 2px;
+            background: #FFCD00;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.25s cubic-bezier(.4,0,.2,1);
+          }
+          .header-link:hover::after,
+          .header-link:focus::after {
+            transform: scaleX(1);
+          }
         `}
       </style>
       <header style={{
@@ -139,10 +165,11 @@ const App = () => {
       justifyContent: windowWidth <= 529 ? 'center' : 'flex-start',
       width: windowWidth <= 529 ? '100%' : 'auto'
     }}>
-      <a href="/#projects" style={linkStyle}>Projects</a>
-      <a href="/about" style={linkStyle}>About</a>
+      <a href="/#projects" className="header-link" style={linkStyle}>Projects</a>
+      <a href="/about" className="header-link" style={linkStyle}>About</a>
       <a
         href="#"
+        className="header-link"
         style={linkStyle}
         onClick={handleContactClick}
       >
@@ -215,84 +242,82 @@ const App = () => {
 
       {/* Main is now empty and ready for new content */}
       <main
+  style={{
+    padding: '4rem',
+    backgroundColor: window.location.pathname === '/about' ? '#000' : getPageColor(),
+    minHeight: '100vh',
+    paddingBottom: '6rem'
+  }}
+>
+  {/* Remove the About heading */}
+  {window.location.pathname === '/projects' && <h1>Projects</h1>}
+  {window.location.pathname !== '/' && window.location.pathname !== '/projects' && window.location.pathname !== '/about' && <h1>Other</h1>}
+
+  {/* Show the grid ONLY on the homepage */}
+  {window.location.pathname === '/' && (
+    <section
+      id="projects"
+      className="project-grid-container"
+      style={{
+        maxWidth: '1440px',
+        margin: '3rem auto 0 auto',
+        padding: '0 2.5rem',
+        boxSizing: 'border-box'
+      }}>
+      <div
+        className="project-grid"
         style={{
-          padding: '4rem',
-          backgroundColor: getPageColor(),
-          minHeight: '100vh',
-          paddingBottom: '6rem'
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gridTemplateRows: '1fr 1fr',
+          gap: '2rem',
+          width: '100%' // Ensures grid fills the container
         }}
       >
-        <h1>
-          {window.location.pathname === '/projects' && 'Projects'}
-          {window.location.pathname === '/about' && 'About'}
-          {window.location.pathname !== '/' && window.location.pathname !== '/projects' && window.location.pathname !== '/about' && 'Other'}
-        </h1>
-
-        {/* Show the grid ONLY on the homepage */}
-        {window.location.pathname === '/' && (
-          <section
-            id="projects"
-            className="project-grid-container"
+        {[1, 2, 3, 4].map((num) => (
+          <div
+            key={num}
             style={{
-              maxWidth: '1440px',
-              margin: '3rem auto 0 auto',
-              padding: '0 2.5rem',
-              boxSizing: 'border-box'
-            }}>
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              width: '100%'
+            }}
+          >
+            <a href={`/projects/project${num}`} className="frost-link" style={{ width: '100%' }}>
+              <img
+                src={
+                  num === 1
+                    ? "/alldis-atlantic/heronowording_Hero.webp"
+                    : num === 2
+                    ? "/pacha/logoworld-04-03.webp"
+                    : num === 3
+                    ? "/Egan/devices_devices.webp"
+                    : num === 4
+                    ? "/inmediasres/70b18d0a-420e-4e03-93eb-0f6b2f043d8a.png"
+                    : ""
+                }
+                alt={`Project ${num}`}
+                style={{
+                  width: '100%',
+                  aspectRatio: '16/9',
+                  borderRadius: '6px',
+                  objectFit: 'cover',
+                  background: '#222'
+                }}
+              />
+            </a>
             <div
-              className="project-grid"
               style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gridTemplateRows: '1fr 1fr',
-                gap: '2rem',
-                width: '100%' // Ensures grid fills the container
+                marginTop: '0.5rem',
+                display: 'flex',
+                gap: '0.5rem',
+                flexWrap: 'wrap'
               }}
             >
-              {[1, 2, 3, 4].map((num) => (
-                <div
-                  key={num}
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'flex-start',
-                    width: '100%'
-                  }}
-                >
-                  <a href={`/projects/project${num}`} className="frost-link" style={{ width: '100%' }}>
-                    <img
-                      src={
-                        num === 1
-                          ? "/alldis-atlantic/heronowording_Hero.webp"
-                          : num === 2
-                          ? "/pacha/logoworld-04-03.webp"
-                          : num === 3
-                          ? "/Egan/devices_devices.webp"
-                          : num === 4
-                          ? "/inmediasres/70b18d0a-420e-4e03-93eb-0f6b2f043d8a.png"
-                          : ""
-                      }
-                      alt={`Project ${num}`}
-                      style={{
-                        width: '100%',
-                        aspectRatio: '16/9',
-                        borderRadius: '6px',
-                        objectFit: 'cover',
-                        background: '#222'
-                      }}
-                    />
-                  </a>
-                  <div
-                    style={{
-                      marginTop: '0.5rem',
-                      display: 'flex',
-                      gap: '0.5rem',
-                      flexWrap: 'wrap'
-                    }}
-                  >
-                    {num === 1 ? (
-                      <>
-                        <span style={{
+              {num === 1 ? (
+                <>
+                  <span style={{
       fontSize: '1.1rem',
       padding: '2px 8px',
       border: '1px solid #FFCD00',
@@ -315,10 +340,10 @@ const App = () => {
     }}>
       Design
     </span>
-                      </>
-                    ) : num === 2 ? (
-                      <>
-                        <span style={{
+                </>
+              ) : num === 2 ? (
+                <>
+                  <span style={{
       fontSize: '1.1rem',
       padding: '2px 8px',
       border: '1px solid #FFCD00',
@@ -341,10 +366,10 @@ const App = () => {
     }}>
       Branding
     </span>
-                      </>
-                    ) : num === 3 ? (
-                      <>
-                        <span style={{
+                </>
+              ) : num === 3 ? (
+                <>
+                  <span style={{
       fontSize: '1.1rem',
       padding: '2px 8px',
       border: '1px solid #FFCD00',
@@ -367,10 +392,10 @@ const App = () => {
     }}>
       Web build
     </span>
-                      </>
-                    ) : (
-                      <>
-                        <span style={{
+                </>
+              ) : (
+                <>
+                  <span style={{
       fontSize: '1.1rem',
       padding: '2px 8px',
       border: '1px solid #FFCD00',
@@ -393,15 +418,30 @@ const App = () => {
     }}>
       Writing
     </span>
-                      </>
-                    )}
-                  </div>
-                </div>
-              ))}
+                </>
+              )}
             </div>
-          </section>
-        )}
-      </main>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {/* Show stacked images on the About page */}
+  {window.location.pathname === '/about' && (
+    <StackedImagesSection
+      images={[
+        '/about/1_1st.webp',
+        '/about/2_intro wording.webp',
+        '/about/3_UX design.webp',
+        '/about/4_mockup real.webp',
+        '/about/5_2nd explination.webp',
+        '/about/6_colour.webp'
+      ]}
+      maxWidth={windowWidth < 900 ? '100%' : '1200px'}
+    />
+  )}
+</main>
 <footer
   style={{
     width: '100%',
