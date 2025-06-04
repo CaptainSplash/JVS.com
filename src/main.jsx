@@ -83,6 +83,23 @@ const App = () => {
             border-bottom: 2px solid #fff;
             color: #FFCD00;
           }
+          /* Frost effect for project images */
+          .frost-link {
+            display: block;
+            width: 100%;
+            border-radius: 6px;
+            overflow: hidden;
+          }
+          .frost-link img {
+            transition: filter 0.3s, opacity 0.3s;
+            will-change: filter, opacity;
+          }
+          .frost-link:hover img,
+          .frost-link:focus img {
+            filter: blur(2px) brightness(0.8);
+            opacity: 0.85;
+            cursor: pointer;
+          }
         `}
       </style>
       <header style={{
@@ -238,11 +255,11 @@ const App = () => {
                   style={{
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'flex-start', // <-- changed from 'center' to 'flex-start'
+                    alignItems: 'flex-start',
                     width: '100%'
                   }}
                 >
-                  <a href={`/projects/project${num}`} style={{ width: '100%' }}>
+                  <a href={`/projects/project${num}`} className="frost-link" style={{ width: '100%' }}>
                     <img
                       src={
                         num === 1
@@ -273,29 +290,111 @@ const App = () => {
                       flexWrap: 'wrap'
                     }}
                   >
-                    <span style={{
-  fontSize: '1.1rem',
-  padding: '2px 8px',
-  border: '1px solid #FFCD00', // <-- changed color here
-  borderRadius: '10px',
-  background: '#181818',
-  color: '#ccc',
-  marginRight: '0.25rem',
-  fontFamily: 'VT323'
-}}>
-  Tag 1
-</span>
-<span style={{
-  fontSize: '1.1rem',
-  padding: '2px 8px',
-  border: '1px solid #FFCD00', // <-- changed color here
-  borderRadius: '10px',
-  background: '#181818',
-  color: '#ccc',
-  fontFamily: 'VT323'
-}}>
-  Tag 2
-</span>
+                    {num === 1 ? (
+                      <>
+                        <span style={{
+      fontSize: '1.1rem',
+      padding: '2px 8px',
+      border: '1px solid #FFCD00',
+      borderRadius: '10px',
+      background: '#181818',
+      color: '#ccc',
+      marginRight: '0.25rem',
+      fontFamily: 'VT323'
+    }}>
+      Branding
+    </span>
+    <span style={{
+      fontSize: '1.1rem',
+      padding: '2px 8px',
+      border: '1px solid #FFCD00',
+      borderRadius: '10px',
+      background: '#181818',
+      color: '#ccc',
+      fontFamily: 'VT323'
+    }}>
+      Design
+    </span>
+                      </>
+                    ) : num === 2 ? (
+                      <>
+                        <span style={{
+      fontSize: '1.1rem',
+      padding: '2px 8px',
+      border: '1px solid #FFCD00',
+      borderRadius: '10px',
+      background: '#181818',
+      color: '#ccc',
+      marginRight: '0.25rem',
+      fontFamily: 'VT323'
+    }}>
+      Marketing Campaign
+    </span>
+    <span style={{
+      fontSize: '1.1rem',
+      padding: '2px 8px',
+      border: '1px solid #FFCD00',
+      borderRadius: '10px',
+      background: '#181818',
+      color: '#ccc',
+      fontFamily: 'VT323'
+    }}>
+      Branding
+    </span>
+                      </>
+                    ) : num === 3 ? (
+                      <>
+                        <span style={{
+      fontSize: '1.1rem',
+      padding: '2px 8px',
+      border: '1px solid #FFCD00',
+      borderRadius: '10px',
+      background: '#181818',
+      color: '#ccc',
+      marginRight: '0.25rem',
+      fontFamily: 'VT323'
+    }}>
+      UX Design
+    </span>
+    <span style={{
+      fontSize: '1.1rem',
+      padding: '2px 8px',
+      border: '1px solid #FFCD00',
+      borderRadius: '10px',
+      background: '#181818',
+      color: '#ccc',
+      fontFamily: 'VT323'
+    }}>
+      Web build
+    </span>
+                      </>
+                    ) : (
+                      <>
+                        <span style={{
+      fontSize: '1.1rem',
+      padding: '2px 8px',
+      border: '1px solid #FFCD00',
+      borderRadius: '10px',
+      background: '#181818',
+      color: '#ccc',
+      marginRight: '0.25rem',
+      fontFamily: 'VT323'
+    }}>
+      Storytelling
+    </span>
+    <span style={{
+      fontSize: '1.1rem',
+      padding: '2px 8px',
+      border: '1px solid #FFCD00',
+      borderRadius: '10px',
+      background: '#181818',
+      color: '#ccc',
+      fontFamily: 'VT323'
+    }}>
+      Writing
+    </span>
+                      </>
+                    )}
                   </div>
                 </div>
               ))}
