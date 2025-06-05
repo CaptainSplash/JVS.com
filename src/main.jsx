@@ -21,6 +21,35 @@ const linkStyle = {
   fontFamily: '"VT323", monospace'
 };
 
+const projectImgStyle = {
+  width: '100%',
+  height: 'auto',
+  maxWidth: '100%',
+  borderRadius: '12px',
+  boxShadow: '0 2px 12px #0007',
+  background: '#222',
+  display: 'block',
+};
+
+const projectRoutes = [
+  '/projects/project1',
+  '/projects/project2',
+  '/projects/project3',
+  '/projects/project4',
+  // Add more here as you add projects
+];
+
+function getProjectNavLinks(currentPath) {
+  const idx = projectRoutes.indexOf(currentPath);
+  if (idx === -1) return { prev: null, next: null };
+  const prevIdx = (idx - 1 + projectRoutes.length) % projectRoutes.length;
+  const nextIdx = (idx + 1) % projectRoutes.length;
+  return {
+    prev: projectRoutes[prevIdx],
+    next: projectRoutes[nextIdx],
+  };
+}
+
 const App = () => {
   const [showContact, setShowContact] = useState(false);
   const [showContactFooter, setShowContactFooter] = useState(false);
@@ -244,8 +273,8 @@ const App = () => {
       <main
   style={{
     padding: '4rem',
-    backgroundColor: window.location.pathname === '/projects/project4' ? '#000' : '#fff', // Black for project 4, white elsewhere
-    color: window.location.pathname === '/projects/project4' ? '#fff' : '#222', // White text on black bg
+    backgroundColor: '#000', // Always black background
+    color: '#fff',           // Always white text
     minHeight: '100vh',
     paddingBottom: '6rem'
   }}
@@ -440,6 +469,103 @@ const App = () => {
       ]}
       maxWidth={windowWidth < 900 ? '100%' : '1200px'}
     />
+  )}
+
+  {/* Project 1: Alldis Atlantic imagery */}
+  {window.location.pathname === '/projects/project1' && (
+    <section
+      style={{
+        maxWidth: 900,
+        margin: '4rem auto 0 auto',
+        padding: 0,
+        background: 'none',
+        border: 'none',
+      }}
+    >
+      {/*
+        { src, alt } pairs for each image
+      */}
+      { [
+        { src: "/alldis-atlantic/project images/1_Hero.webp", alt: "Alldis Atlantic Hero" },
+        { src: "/alldis-atlantic/project images/2_1st explination.webp", alt: "1st Explanation" },
+        { src: "/alldis-atlantic/project images/3_billboard b&w.webp", alt: "Billboard Black and White" },
+        { src: "/alldis-atlantic/project images/4_2nd explination.webp", alt: "2nd Explanation" },
+        { src: "/alldis-atlantic/project images/5_grid systm.webp", alt: "Grid System" },
+        { src: "/alldis-atlantic/project images/6_3rd.webp", alt: "3rd" },
+        { src: "/alldis-atlantic/project images/7_moodboard.webp", alt: "Moodboard" },
+        { src: "/alldis-atlantic/project images/8_4th.webp", alt: "4th" },
+        { src: "/alldis-atlantic/project images/9_website.webp", alt: "Website" },
+        { src: "/alldis-atlantic/project images/10_socials.webp", alt: "Socials" },
+        { src: "/alldis-atlantic/project images/11_envelope and app.webp", alt: "Envelope and App" },
+        { src: "/alldis-atlantic/project images/12_poster.webp", alt: "Poster" },
+        { src: "/alldis-atlantic/project images/13_lanyard and paper.webp", alt: "Lanyard and Paper" },
+        { src: "/alldis-atlantic/project images/14_tube.webp", alt: "Tube" },
+      ].map(img => (
+        <img
+          key={img.src}
+          src={img.src}
+          alt={img.alt}
+          style={{
+            width: '100%',
+            height: 'auto',
+            display: 'block',
+            marginBottom: '1rem', // Reduced gap here
+            borderRadius: 0,
+            boxShadow: 'none',
+            background: 'none',
+          }}
+        />
+      )) }
+    </section>
+  )}
+
+  {/* Project navigation links for Project 1 */}
+  {window.location.pathname === '/projects/project1' && (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        maxWidth: 900,
+        margin: '3rem auto 0 auto',
+        padding: '0 0.5rem',
+      }}
+    >
+      <a
+        href={getProjectNavLinks('/projects/project1').prev}
+        style={{
+          background: '#181818',
+          color: '#FFCD00',
+          border: '1px solid #FFCD00',
+          borderRadius: 8,
+          padding: '0.75rem 2rem',
+          fontFamily: '"VT323", monospace',
+          fontSize: '1.2rem',
+          textDecoration: 'none',
+          fontWeight: 700,
+          transition: 'background 0.2s, color 0.2s',
+        }}
+      >
+        ← Previous Project
+      </a>
+      <a
+        href={getProjectNavLinks('/projects/project1').next}
+        style={{
+          background: '#181818',
+          color: '#FFCD00',
+          border: '1px solid #FFCD00',
+          borderRadius: 8,
+          padding: '0.75rem 2rem',
+          fontFamily: '"VT323", monospace',
+          fontSize: '1.2rem',
+          textDecoration: 'none',
+          fontWeight: 700,
+          transition: 'background 0.2s, color 0.2s',
+        }}
+      >
+        Next Project →
+      </a>
+    </div>
   )}
 
   {/* Project 4 description section */}
@@ -656,6 +782,58 @@ const App = () => {
           />
         </div>
       </section>
+
+  {/* Project navigation links for all project pages */}
+  {projectRoutes.includes(window.location.pathname) && (() => {
+    const { prev, next } = getProjectNavLinks(window.location.pathname);
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          maxWidth: 900,
+          margin: '3rem auto 0 auto',
+          padding: '0 0.5rem',
+        }}
+      >
+        <a
+          href={prev}
+          style={{
+            background: '#181818',
+            color: '#FFCD00',
+            border: '1px solid #FFCD00',
+            borderRadius: 8,
+            padding: '0.75rem 2rem',
+            fontFamily: '"VT323", monospace',
+            fontSize: '1.2rem',
+            textDecoration: 'none',
+            fontWeight: 700,
+            transition: 'background 0.2s, color 0.2s',
+          }}
+        >
+          ← Previous Project
+        </a>
+        <a
+          href={next}
+          style={{
+            background: '#181818',
+            color: '#FFCD00',
+            border: '1px solid #FFCD00',
+            borderRadius: 8,
+            padding: '0.75rem 2rem',
+            fontFamily: '"VT323", monospace',
+            fontSize: '1.2rem',
+            textDecoration: 'none',
+            fontWeight: 700,
+            transition: 'background 0.2s, color 0.2s',
+          }}
+        >
+          Next Project →
+        </a>
+      </div>
+    );
+  })()}
     </>
   )}
 </main>
