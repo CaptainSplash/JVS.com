@@ -244,14 +244,14 @@ const App = () => {
       <main
   style={{
     padding: '4rem',
-    backgroundColor: window.location.pathname === '/about' ? '#000' : getPageColor(),
+    backgroundColor: window.location.pathname === '/projects/project4' ? '#000' : '#fff', // Black for project 4, white elsewhere
+    color: window.location.pathname === '/projects/project4' ? '#fff' : '#222', // White text on black bg
     minHeight: '100vh',
     paddingBottom: '6rem'
   }}
 >
-  {/* Remove the About heading */}
+  {/* Remove the About heading and 'Other' */}
   {window.location.pathname === '/projects' && <h1>Projects</h1>}
-  {window.location.pathname !== '/' && window.location.pathname !== '/projects' && window.location.pathname !== '/about' && <h1>Other</h1>}
 
   {/* Show the grid ONLY on the homepage */}
   {window.location.pathname === '/' && (
@@ -440,6 +440,223 @@ const App = () => {
       ]}
       maxWidth={windowWidth < 900 ? '100%' : '1200px'}
     />
+  )}
+
+  {/* Project 4 description section */}
+  {window.location.pathname === '/projects/project4' && (
+    <>
+      <section
+        style={{
+          maxWidth: 700,
+          margin: '4rem auto 2rem auto',
+          textAlign: 'center',
+          fontFamily: '"VT323", monospace',
+          fontSize: '1.5rem',
+          color: '#fff', // White text for dark background
+          fontStyle: 'italic',
+          letterSpacing: '0.01em'
+        }}
+      >
+        In the age of clicks and fame, one young journalist lands the scoop of a lifetime—only to discover they were never in control of the story at all.
+      </section>
+      {/* Screenplay snippet as images */}
+      <section
+        style={{
+          maxWidth: 900,
+          margin: '2rem auto',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 0,
+          alignItems: 'center',
+          background: '#000', // Black background
+          padding: '2rem 0',
+          borderRadius: 12
+        }}
+      >
+        {/*
+          '/inmediasres/Snippet for website-1.webp',
+          '/inmediasres/Snippet for website-2.webp',
+          '/inmediasres/Snippet for website-3.webp',
+          '/inmediasres/Snippet for website-4.webp',
+          '/inmediasres/Snippet for website-5.webp',
+          '/inmediasres/Snippet for website-6.webp',
+          '/inmediasres/Snippet for website-7.webp',
+          '/inmediasres/Snippet for website-8.webp'
+        */}
+        {Array.from({ length: 8 }, (_, i) => (
+          <img
+            key={i}
+            src={`/inmediasres/Snippet for website-${i + 1}.webp`}
+            alt={`Screenplay page ${i + 1}`}
+            style={{
+              width: '100%',
+              maxWidth: '100%',
+              display: 'block',
+              borderRadius: 0,
+              boxShadow: '0 4px 24px #000a',
+              marginBottom: '1.5rem',
+              background: '#111'
+            }}
+          />
+        ))}
+      </section>
+      {/* CTA Section */}
+      <section
+        style={{
+          maxWidth: 600,
+          margin: '3rem auto 0 auto',
+          background: 'linear-gradient(90deg, #23272f 60%, #181a1f 100%)',
+          border: '2px solid #ffcd00',
+          borderRadius: 16,
+          padding: '2.5rem 2rem',
+          color: '#fff',
+          textAlign: 'center',
+          boxShadow: '0 4px 32px #0003'
+        }}
+      >
+        <div style={{ fontSize: '2rem', marginBottom: '1rem', fontFamily: '"VT323", monospace' }}>
+          📝 Like what you see?
+        </div>
+        <p style={{ fontSize: '1.15rem', marginBottom: '2rem', color: '#ffe', fontFamily: '"VT323", monospace' }}>
+          “In Medias Res” is part of a larger story — and I’d love to share more with collaborators, producers, or curious minds.
+        </p>
+        <button
+          type="button"
+          onClick={() => setShowContact(true)}
+          style={{
+            background: 'linear-gradient(90deg, #ffcd00 60%, #fffbe6 100%)',
+            color: '#181a1f',
+            border: 'none',
+            borderRadius: '8px',
+            padding: '0.9rem 2.5rem',
+            fontSize: '1.15rem',
+            fontWeight: 700,
+            fontFamily: '"VT323", monospace',
+            cursor: 'pointer',
+            boxShadow: '0 2px 8px #0004',
+            transition: 'background 0.2s'
+          }}
+        >
+          Drop me a message
+        </button>
+        {showContact && (
+          <form
+            action="https://formspree.io/f/mkgbwejg"
+            method="POST"
+            ref={contactRef}
+            style={{
+              marginTop: '2rem',
+              background: '#181818',
+              border: '1px solid #888',
+              borderRadius: '8px',
+              padding: '1rem',
+              zIndex: 10,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.5rem',
+              minWidth: '250px',
+              maxWidth: 400,
+              marginLeft: 'auto',
+              marginRight: 'auto'
+            }}
+          >
+            <input
+              name="email"
+              type="email"
+              placeholder="Your email"
+              required
+              style={{
+                padding: '0.5rem',
+                borderRadius: '4px',
+                border: '1px solid #333',
+                fontFamily: '"VT323", monospace'
+              }}
+            />
+            <textarea
+              name="message"
+              placeholder="Your message"
+              required
+              rows={3}
+              style={{
+                padding: '0.5rem',
+                borderRadius: '4px',
+                border: '1px solid #333',
+                fontFamily: '"VT323", monospace',
+                resize: 'vertical'
+              }}
+            />
+            <button
+              type="submit"
+              style={{
+                background: '#333',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '4px',
+                padding: '0.5rem',
+                fontFamily: '"VT323", monospace',
+                cursor: 'pointer'
+              }}
+            >
+              Send
+            </button>
+          </form>
+        )}
+      </section>
+
+      {/* Storyboard Images Only, 2x2 grid, no box or title */}
+      <section
+        style={{
+          maxWidth: 1400,
+          margin: '4rem auto 0 auto',
+          padding: 0,
+          background: 'none',
+          border: 'none',
+        }}
+      >
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: '2.5rem',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          {Array.from({ length: 4 }, (_, i) => (
+            <img
+              key={i}
+              src={`/inmediasres/Storyboards/${i + 1}.webp`}
+              alt={`Storyboard ${i + 1}`}
+              style={{
+                width: '100%',
+                height: 'auto',
+                maxWidth: '100%',
+                borderRadius: '12px',
+                boxShadow: '0 2px 12px #0007',
+                background: '#222',
+                display: 'block',
+              }}
+            />
+          ))}
+        </div>
+        {/* Fifth image full width below */}
+        <div style={{ marginTop: '2.5rem' }}>
+          <img
+            src="/inmediasres/Storyboards/5.webp"
+            alt="Storyboard 5"
+            style={{
+              width: '100%',
+              height: 'auto',
+              maxWidth: '100%',
+              borderRadius: '12px',
+              boxShadow: '0 2px 12px #0007',
+              background: '#222',
+              display: 'block',
+            }}
+          />
+        </div>
+      </section>
+    </>
   )}
 </main>
 <footer
