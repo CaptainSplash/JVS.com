@@ -300,7 +300,7 @@ const App = () => {
           gridTemplateColumns: '1fr 1fr',
           gridTemplateRows: '1fr 1fr',
           gap: '2rem',
-          width: '100%' // Ensures grid fills the container
+          width: '100%'
         }}
       >
         {[1, 2, 3, 4].map((num) => (
@@ -310,7 +310,7 @@ const App = () => {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'flex-start',
-              width: '100%'
+              width: '100%',
             }}
           >
             <a href={`/projects/project${num}`} className="frost-link" style={{ width: '100%' }}>
@@ -332,7 +332,8 @@ const App = () => {
                   aspectRatio: '16/9',
                   borderRadius: '6px',
                   objectFit: 'cover',
-                  background: '#222'
+                  background: '#222',
+                  // Remove minHeight/maxHeight for all images
                 }}
               />
             </a>
@@ -458,17 +459,48 @@ const App = () => {
 
   {/* Show stacked images on the About page */}
   {window.location.pathname === '/about' && (
-    <StackedImagesSection
-      images={[
-        '/about/1_1st.webp',
-        '/about/2_intro wording.webp',
-        '/about/3_UX design.webp',
-        '/about/4_mockup real.webp',
-        '/about/5_2nd explination.webp',
-        '/about/6_colour.webp'
-      ]}
-      maxWidth={windowWidth < 900 ? '100%' : '1200px'}
+    <section
+    style={{
+      width: '100vw',
+      position: 'relative',
+      left: '50%',
+      right: '50%',
+      marginLeft: '-50vw',
+      marginRight: '-50vw',
+      background: '#000',
+      padding: 0,
+      overflow: 'hidden',
+    }}
+  >
+    <img
+      src="/about/1_1st.webp"
+      alt="About Hero"
+      style={{
+        width: '100vw',
+        maxWidth: '100vw',
+        display: 'block',
+        objectFit: 'cover',
+        height: 'auto',
+        margin: 0,
+        borderRadius: 0,
+      }}
     />
+    <div style={{
+      maxWidth: windowWidth < 900 ? '100%' : '1200px',
+      margin: '0 auto',
+    }}>
+      <StackedImagesSection
+        images={[
+          '/about/2_intro wording.webp',
+          '/about/3_UX design.webp',
+          '/about/4_mockup real.webp',
+          '/about/5_2nd explination.webp',
+          '/about/6_colour.webp'
+        ]}
+        maxWidth={windowWidth < 900 ? '100%' : '1200px'}
+      />
+    </div>
+  </section>
   )}
 
   {/* Project 1: Alldis Atlantic imagery */}
@@ -509,7 +541,7 @@ const App = () => {
             width: '100%',
             height: 'auto',
             display: 'block',
-            marginBottom: '1rem', // Reduced gap here
+            marginBottom: '4px', // Small gap between images
             borderRadius: 0,
             boxShadow: 'none',
             background: 'none',
@@ -550,6 +582,192 @@ const App = () => {
       </a>
       <a
         href={getProjectNavLinks('/projects/project1').next}
+        style={{
+          background: '#181818',
+          color: '#FFCD00',
+          border: '1px solid #FFCD00',
+          borderRadius: 8,
+          padding: '0.75rem 2rem',
+          fontFamily: '"VT323", monospace',
+          fontSize: '1.2rem',
+          textDecoration: 'none',
+          fontWeight: 700,
+          transition: 'background 0.2s, color 0.2s',
+        }}
+      >
+        Next Project →
+      </a>
+    </div>
+  )}
+
+  {/* Project 2 imagery - Pacha Studios */}
+  {window.location.pathname === '/projects/project2' && (
+    <section
+      style={{
+        maxWidth: 900,
+        margin: '4rem auto 0 auto',
+        padding: 0,
+        background: 'none',
+        border: 'none',
+      }}
+    >
+      { [
+        { src: "/pacha/project images/1-01.webp", alt: "Pacha Project Image 1" },
+        { src: "/pacha/project images/2-02.webp", alt: "Pacha Project Image 2" },
+        { src: "/pacha/project images/3-03.webp", alt: "Pacha Project Image 3" },
+        { src: "/pacha/project images/4-04.webp", alt: "Pacha Project Image 4" },
+        { src: "/pacha/project images/5-05.webp", alt: "Pacha Project Image 5" },
+        { src: "/pacha/project images/6-06.webp", alt: "Pacha Project Image 6" },
+        { src: "/pacha/project images/7-07.webp", alt: "Pacha Project Image 7" },
+        { src: "/pacha/project images/8-08.webp", alt: "Pacha Project Image 8" },
+        { src: "/pacha/project images/9-09.webp", alt: "Pacha Project Image 9" },
+        { src: "/pacha/project images/10-10.webp", alt: "Pacha Project Image 10" },
+        { src: "/pacha/project images/11-11.webp", alt: "Pacha Project Image 11" },
+        { src: "/pacha/project images/12-12.webp", alt: "Pacha Project Image 12" },
+        { src: "/pacha/project images/13-13.webp", alt: "Pacha Project Image 13" },
+        { src: "/pacha/project images/14-14.webp", alt: "Pacha Project Image 14" },
+        { src: "/pacha/project images/15-15.webp", alt: "Pacha Project Image 15" },
+        { src: "/pacha/project images/16-16.webp", alt: "Pacha Project Image 16" },
+        { src: "/pacha/project images/17-17.webp", alt: "Pacha Project Image 17" },
+      ].map(img => (
+        <img
+          key={img.src}
+          src={img.src}
+          alt={img.alt}
+          style={{
+            width: '100%',
+            height: 'auto',
+            display: 'block',
+            marginBottom: 0, // No gap between images
+            borderRadius: 0,
+            boxShadow: 'none',
+            background: 'none',
+          }}
+        />
+      )) }
+    </section>
+  )}
+
+  {/* Project navigation links for Project 2 */}
+  {window.location.pathname === '/projects/project2' && (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        maxWidth: 900,
+        margin: '3rem auto 0 auto',
+        padding: '0 0.5rem',
+      }}
+    >
+      <a
+        href={getProjectNavLinks('/projects/project2').prev}
+        style={{
+          background: '#181818',
+          color: '#FFCD00',
+          border: '1px solid #FFCD00',
+          borderRadius: 8,
+          padding: '0.75rem 2rem',
+          fontFamily: '"VT323", monospace',
+          fontSize: '1.2rem',
+          textDecoration: 'none',
+          fontWeight: 700,
+          transition: 'background 0.2s, color 0.2s',
+        }}
+      >
+        ← Previous Project
+      </a>
+      <a
+        href={getProjectNavLinks('/projects/project2').next}
+        style={{
+          background: '#181818',
+          color: '#FFCD00',
+          border: '1px solid #FFCD00',
+          borderRadius: 8,
+          padding: '0.75rem 2rem',
+          fontFamily: '"VT323", monospace',
+          fontSize: '1.2rem',
+          textDecoration: 'none',
+          fontWeight: 700,
+          transition: 'background 0.2s, color 0.2s',
+        }}
+      >
+        Next Project →
+      </a>
+    </div>
+  )}
+
+  {/* Project 3 imagery - Egan Plant Services */}
+  {window.location.pathname === '/projects/project3' && (
+    <section
+      style={{
+        maxWidth: 900,
+        margin: '4rem auto 0 auto',
+        padding: 0,
+        background: 'none',
+        border: 'none',
+      }}
+    >
+      { [
+        { src: "/Egan/project images/1_1st.webp", alt: "Egan Project Image 1" },
+        { src: "/Egan/project images/2_intro wording.webp", alt: "Egan Project Image 2" },
+        { src: "/Egan/project images/3_UX design_UX design.webp", alt: "Egan Project Image 3" },
+        { src: "/Egan/project images/4_mockup real_mockup real.webp", alt: "Egan Project Image 4" },
+        { src: "/Egan/project images/5_2nd explination.webp", alt: "Egan Project Image 5" },
+        { src: "/Egan/project images/6_colour.webp", alt: "Egan Project Image 6" },
+        { src: "/Egan/project images/7_socials_socials.webp", alt: "Egan Project Image 7" },
+        { src: "/Egan/project images/8_devices_devices.webp", alt: "Egan Project Image 8" },
+        { src: "/Egan/project images/9_final.webp", alt: "Egan Project Image 9" },
+      ].map(img => (
+        <img
+          key={img.src}
+          src={img.src}
+          alt={img.alt}
+          style={{
+            width: '100%',
+            height: 'auto',
+            display: 'block',
+            marginBottom: 0, // No gap between images
+            borderRadius: 0,
+            boxShadow: 'none',
+            background: 'none',
+          }}
+        />
+      )) }
+    </section>
+  )}
+
+  {/* Project navigation links for Project 3 */}
+  {window.location.pathname === '/projects/project3' && (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        maxWidth: 900,
+        margin: '3rem auto 0 auto',
+        padding: '0 0.5rem',
+      }}
+    >
+      <a
+        href={getProjectNavLinks('/projects/project3').prev}
+        style={{
+          background: '#181818',
+          color: '#FFCD00',
+          border: '1px solid #FFCD00',
+          borderRadius: 8,
+          padding: '0.75rem 2rem',
+          fontFamily: '"VT323", monospace',
+          fontSize: '1.2rem',
+          textDecoration: 'none',
+          fontWeight: 700,
+          transition: 'background 0.2s, color 0.2s',
+        }}
+      >
+        ← Previous Project
+      </a>
+      <a
+        href={getProjectNavLinks('/projects/project3').next}
         style={{
           background: '#181818',
           color: '#FFCD00',
