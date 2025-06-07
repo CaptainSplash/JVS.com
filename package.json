@@ -2,7 +2,6 @@
   "name": "JVS.com",
   "version": "1.0.0",
   "scripts": {
-    "build": "chmod +x node_modules/.bin/vite && vite build",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
